@@ -4,7 +4,7 @@ pragma solidity ^0.8.30;
 contract CrowdFunding {
     struct Campaign {
         string description;
-        uint256 deadline; // Now stores as timestamp
+        uint256 deadline;
         uint256 goal;
         uint256 raised;
         address founder;
@@ -27,7 +27,7 @@ contract CrowdFunding {
         users[msg.sender] = true;
     }
 
-    // Accepts duration in seconds, converts to deadline timestamp
+    
     function createcampaign(string memory des, uint256 durationInSeconds, uint256 g) public {
         campaigns[campid] = Campaign({
             description: des,
@@ -74,7 +74,7 @@ contract CrowdFunding {
         uint256 amount = contributions[id][msg.sender];
         require(amount > 0, "No contribution to refund");
 
-        contributions[id][msg.sender] = 0; // prevent re-entrancy
+        contributions[id][msg.sender] = 0;
         payable(msg.sender).transfer(amount);
     }
 }
